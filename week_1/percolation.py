@@ -23,41 +23,13 @@ if __name__ == "__main__":
         qu.union(0, i)
         qu.union(args.N*args.N + 1, args.N*(args.N - 1) + i)
 
-    if grid[0][0] == 1:
-        if grid[1][0] == 1:
-            qu.union(1, args.N + 1)
-        if grid[0][1] == 1:
-            qu.union(1, 2)
+    for i in range(args.N - 1):
+        for j in range(args.N - 1):
+            if (grid[i][j] == 1) and (grid[i][j+1] == 1):
+                qu.union(i*args.N + j + 1, i*args.N + j + 2)
 
-    if grid[0][args.N - 1] == 1:
-        if grid[1][args.N - 1] == 1:
-            qu.union(args.N, args.N + args.N)
-        if grid[0][args.N - 2] == 1:
-            qu.union(args.N, args.N - 1)
-
-    if grid[args.N - 1][0] == 1:
-        if grid[args.N - 2][0] == 1:
-            qu.union(args.N*(args.N - 1) + 1, args.N*(args.N - 2) + 1)
-        if grid[args.N - 1][1] == 1:
-            qu.union(args.N*(args.N - 1) + 1, args.N*(args.N - 1) + 2)
-
-    if grid[args.N - 1][args.N - 1] == 1:
-        if grid[args.N - 2][args.N - 1] == 1:
-            qu.union(args.N*args.N, args.N*(args.N - 1))
-        if grid[args.N - 1][args.N - 2] == 1:
-            qu.union(args.N*args.N, args.N*args.N - 1)
-
-    for i in range(1, args.N - 1):
-        for j in range(1, args.N - 1):
-            if grid[i][j] == 1:
-                if grid[i - 1][j] == 1:
-                    qu.union(i*args.N +j + 1, (i - 1)*args.N +j + 1)
-                if grid[i + 1][j] == 1:
-                    qu.union(i*args.N +j + 1, (i + 1)*args.N +j + 1)
-                if grid[i][j - 1] == 1:
-                    qu.union(i*args.N +j + 1, i*args.N +(j - 1) + 1)
-                if grid[i][j + 1] == 1:
-                    qu.union(i*args.N +j + 1, i*args.N +(j + 1) + 1)
+            if (grid[i][j] == 1) and (grid[i+1][j] == 1):
+                qu.union((i+1)*args.N + j + 1, i*args.N + j + 1)
 
     print(qu.connected(0, args.N*args.N + 1))
             
